@@ -39,5 +39,5 @@ var dkp=272383;
 var dkpc=1957080;
 var price=3_800_000;
 var login=new LoginModel{Email = "info@example.ir", Password = "1234" };
-var result = _digikala.ChangePrice(dkpc, dkp, price, login);
+var result = service.ChangePrice(dkpc, dkp, price, login);
 ```
