@@ -1653,7 +1653,7 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "DigiKalaSellerBot.Core/1.0.0": {
+      "DigiKalaSellerBot.Core/1.5.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
@@ -1854,7 +1854,7 @@
       ]
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
-      "sha512": "bLpT1f/SFlO1CzqXG12KnJzpZs6lv24uX2Rzi4Fmm0noJpNlnWRVryuO3yK18Ca04t/YHcO1e1Z0WDfjseqNzw==",
+      "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
       "type": "package",
       "path": "microsoft.netcore.platforms/1.1.0",
       "files": [
@@ -3793,7 +3793,7 @@
       ]
     },
     "System.Net.Http/4.3.0": {
-      "sha512": "Z1UfSF6dlpCdZdxh6LeoGlYH+q6ptG/iiIWgUUeKhE3DbQACmZkU7Sz2nOX0qdHjz72MOdYRbkSJ5Qwl6sZgvg==",
+      "sha512": "sYg+FtILtRQuYWSIAuNOELwVuVsxVyJGWQyOnlAzhV4xvhyFnON1bAzYYC+jjRW8JREM45R0R5Dgi8MTC5sEwA==",
       "type": "package",
       "path": "system.net.http/4.3.0",
       "files": [
@@ -5752,7 +5752,7 @@
         "system.xml.xdocument.nuspec"
       ]
     },
-    "DigiKalaSellerBot.Core/1.0.0": {
+    "DigiKalaSellerBot.Core/1.5.0": {
       "type": "project",
       "path": "../DigiKalaSellerBot.Core/DigiKalaSellerBot.Core.csproj",
       "msbuildProject": "../DigiKalaSellerBot.Core/DigiKalaSellerBot.Core.csproj"
@@ -5760,7 +5760,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "DigiKalaSellerBot.Core >= 1.0.0",
+      "DigiKalaSellerBot.Core >= 1.5.0",
       "MSTest.TestAdapter >= 2.1.1",
       "MSTest.TestFramework >= 2.1.1",
       "Microsoft.NET.Test.Sdk >= 16.7.1",
@@ -5768,23 +5768,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\WINDOWS 10\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Afshar\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Programming\\DigiKalaSellerBot\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Test\\DigiKalaSellerBot.Test.csproj",
+      "projectUniqueName": "D:\\Programming\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Test\\DigiKalaSellerBot.Test.csproj",
       "projectName": "DigiKalaSellerBot.Test",
-      "projectPath": "D:\\Programming\\DigiKalaSellerBot\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Test\\DigiKalaSellerBot.Test.csproj",
-      "packagesPath": "C:\\Users\\WINDOWS 10\\.nuget\\packages\\",
-      "outputPath": "D:\\Programming\\DigiKalaSellerBot\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Test\\obj\\",
+      "projectPath": "D:\\Programming\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Test\\DigiKalaSellerBot.Test.csproj",
+      "packagesPath": "C:\\Users\\Afshar\\.nuget\\packages\\",
+      "outputPath": "D:\\Programming\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Test\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\WINDOWS 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Afshar\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5792,14 +5788,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "D:\\local nuget stimulsoft": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\Programming\\DigiKalaSellerBot\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core.csproj": {
-              "projectPath": "D:\\Programming\\DigiKalaSellerBot\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core.csproj"
+            "D:\\Programming\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core.csproj": {
+              "projectPath": "D:\\Programming\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core.csproj"
             }
           }
         }

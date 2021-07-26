@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Oqp0nCqnb465Ofaa0kbn7z0fs4XSIRUegq1qIa62nzLRzjQazNdGIQ9pfu5Clfn4Tleip483cYtHOVXuWilb/g==",
+  "dgSpecHash": "Sc38K6oIzqKfmPWelziwEwSFoSI4+q1y2kIACI4Mq6MOsPNldIUqwI0GeoftlntGS1kNsDOK4WdTVnpbAu0NEA==",
   "success": true,
-  "projectFilePath": "D:\\Programming\\DigiKalaSellerBot\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core.csproj",
+  "projectFilePath": "D:\\Programming\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\WINDOWS 10\\.nuget\\packages\\htmlagilitypack\\1.4.9.5\\htmlagilitypack.1.4.9.5.nupkg.sha512",
-    "C:\\Users\\WINDOWS 10\\.nuget\\packages\\newtonsoft.json\\8.0.3\\newtonsoft.json.8.0.3.nupkg.sha512",
-    "C:\\Users\\WINDOWS 10\\.nuget\\packages\\restsharp\\105.2.3\\restsharp.105.2.3.nupkg.sha512"
+    "C:\\Users\\Afshar\\.nuget\\packages\\htmlagilitypack\\1.4.9.5\\htmlagilitypack.1.4.9.5.nupkg.sha512",
+    "C:\\Users\\Afshar\\.nuget\\packages\\newtonsoft.json\\8.0.3\\newtonsoft.json.8.0.3.nupkg.sha512",
+    "C:\\Users\\Afshar\\.nuget\\packages\\restsharp\\105.2.3\\restsharp.105.2.3.nupkg.sha512"
   ],
   "logs": [
     {

@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programming\\DigiKalaSellerBot\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core.csproj": {}
+    "D:\\Programming\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core.csproj": {}
   },
   "projects": {
-    "D:\\Programming\\DigiKalaSellerBot\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core.csproj": {
-      "version": "1.0.0",
+    "D:\\Programming\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core.csproj": {
+      "version": "1.5.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\DigiKalaSellerBot\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core.csproj",
+        "projectUniqueName": "D:\\Programming\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core.csproj",
         "projectName": "DigiKalaSellerBot.Core",
-        "projectPath": "D:\\Programming\\DigiKalaSellerBot\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core.csproj",
-        "packagesPath": "C:\\Users\\WINDOWS 10\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\DigiKalaSellerBot\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\obj\\",
+        "projectPath": "D:\\Programming\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core.csproj",
+        "packagesPath": "C:\\Users\\Afshar\\.nuget\\packages\\",
+        "outputPath": "D:\\Programming\\DigiKalaSellerBot.Core\\DigiKalaSellerBot.Core\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\WINDOWS 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Afshar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "D:\\local nuget stimulsoft": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

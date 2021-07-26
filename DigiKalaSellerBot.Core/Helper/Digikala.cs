@@ -34,8 +34,17 @@ namespace DigiKalaSellerBot.Core.Helper
         #endregion
 
         #region Login
-        private void Login(LoginModel model)
+        public  void Login(LoginModel model)
         {
+            if (model == null)
+                throw new ArgumentNullException(nameof(model), "مشخصات ورود به پنل سلر دیجی کالا را وارد نمایید");
+
+            if (string.IsNullOrEmpty(model.Email))
+                throw new ArgumentNullException(nameof(model.Email), "ایمیل ورود به پنل سلر دیجی کالا را وارد نمایید");
+            if (string.IsNullOrEmpty(model.Password))
+                throw new ArgumentNullException(nameof(model.Password), "کلمه عبور ورود به پنل سلر دیجی کالا را وارد نمایید");
+
+
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
@@ -148,25 +157,15 @@ namespace DigiKalaSellerBot.Core.Helper
         /// <param name="newPrice">قیمت جدید به ریال</param>
         /// <param name="login">مشخصات ورود به پنل</param>
         /// <returns></returns>
-        public ResultModel ChangePrice(int dkpc, int dkp, int newPrice, LoginModel login)
-        {
-            if (login == null)
-                throw new ArgumentNullException(nameof(login), "مشخصات ورود به پنل سلر دیجی کالا را وارد نمایید");
-            
-            if (string.IsNullOrEmpty(login.Email))
-                throw new ArgumentNullException(nameof(login.Email), "ایمیل ورود به پنل سلر دیجی کالا را وارد نمایید");
-            if (string.IsNullOrEmpty(login.Password))
-                throw new ArgumentNullException(nameof(login.Password), "کلمه عبور ورود به پنل سلر دیجی کالا را وارد نمایید");
-
-
+        public ResultModel ChangePrice(int dkpc, int dkp, int newPrice)
+        {   
             var product = GetProductInfo(dkp);
             if(product==null)
                 throw new ArgumentNullException(nameof(dkp),"محصول مورد نظر یافت نشد");
 
             if(product.Data.All(q => q.price_list.variant_id != dkpc))
-                throw new ArgumentNullException(nameof(dkpc), "تنوع مورد نظر یافت نشد");
+                throw new ArgumentNullException(nameof(dkpc), "تنوع مورد نظر یافت نشد");           
             
-            Login(login);
 
             var info = GetStockInfo(dkpc, dkp);
 
@@ -206,8 +205,10 @@ namespace DigiKalaSellerBot.Core.Helper
 
         #region GetStockInfo
 
-        private SellerStockInfoModel GetStockInfo(int dkpc,int dkp)
+        public SellerStockInfoModel GetStockInfo(int dkpc,int dkp)
         {
+            
+
             _restClient = new RestClient("https://seller.digikala.com/content/create/product/variant/search/");
             _restRequest = new RestRequest(Method.POST);
             _restRequest.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0");
@@ -275,6 +276,41 @@ namespace DigiKalaSellerBot.Core.Helper
             }
             
             return null;
+        }
+
+        #endregion
+
+        #region GetSellerProducts
+
+        public List<ProductItemDetail> GetSellerProducts(int pageSize=20,bool? buyBoxWinner=null)
+        {
+            _restClient = new RestClient("https://seller.digikala.com/ajax/variants/search/");
+            _restRequest = new RestRequest(Method.POST);
+            _restRequest.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0");
+            foreach (RestResponseCookie cookie4 in _cookies)
+            {
+                _restRequest.AddCookie(cookie4.Name, cookie4.Value);
+            }
+
+            _restRequest.AddParameter("items", pageSize);
+            if(buyBoxWinner.HasValue)
+                _restRequest.AddParameter("search[is_buy_box_winner]", buyBoxWinner.Value?1: 0);
+
+            _restRequest.AddParameter("search[type]", "all");
+            _restRequest.AddParameter("search[active]", 1);
+            _restRequest.AddParameter("search[moderation_status]", "approved");
+
+            _response = _restClient.Execute(_restRequest);
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(_response.Content);
+            if (string.IsNullOrEmpty(_response.Content))
+                return null;
+            
+
+            var data = JsonConvert.DeserializeObject<ProductSearchModel>(_response.Content);
+            return data.data.Items;         
+
+
         }
 
         #endregion
