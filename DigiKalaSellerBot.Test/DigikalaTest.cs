@@ -90,5 +90,29 @@ namespace DigiKalaSellerBot.Test
 
 
         }
+
+        [TestMethod]
+        public void CommentTest()
+        {
+            var data = _digikala.GetComments(3868296);
+            Assert.AreEqual(true,data.Any());
+        }
+
+        [TestMethod]
+        public void PromotionTest()
+        {
+            //arrange
+            var dkp = 4452500;
+            var dkpc = 19806737;
+            var price = 1_540_000;
+            var login = new LoginModel { Email = "", Password = "" };
+
+            //act
+            _digikala.Login(login);
+            var result = _digikala.ChangePromotionPrice(dkpc, dkp, price);
+
+            //assert
+            Assert.AreEqual(true, result.status);
+        }
     }
 }
