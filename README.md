@@ -39,5 +39,27 @@ var dkp=272383;
 var dkpc=1957080;
 var price=3_800_000;
 var login=new LoginModel{Email = "info@example.ir", Password = "1234" };
-var result = service.ChangePrice(dkpc, dkp, price, login);
+service.Login(login);
+var result = service.ChangePrice(dkpc, dkp, price);
 ```
+
+
+
+دریافت لیست محصولات سلر
+```csharp
+var service = new DigiKala();
+var login=new LoginModel{Email = "info@example.ir", Password = "1234" };
+service.Login(login);
+var result = service.GetSellerProducts();
+```
+
+
+
+دریافت لیست محصولاتی که بای باکس نیست
+```csharp
+var service = new DigiKala();
+var login=new LoginModel{Email = "info@example.ir", Password = "1234" };
+service.Login(login);
+var result = service.GetSellerProducts(buyBoxWinner:false);
+```
+
