@@ -32,6 +32,15 @@ var info=service.GetProductInfo(dkp);
 ```
 
 
+دریافت لیست نظرات محصول
+```csharp
+var service = new DigiKala();
+var dkp=3868296;
+var data = service.GetComments(dkp);
+```
+
+
+
 برای کاهش قیمت تنوع مورد نظر
 ```csharp
 var service = new DigiKala();
@@ -41,6 +50,21 @@ var price=3_800_000;
 var login=new LoginModel{Email = "info@example.ir", Password = "1234" };
 service.Login(login);
 var result = service.ChangePrice(dkpc, dkp, price);
+```
+
+
+
+
+
+برای کاهش قیمت پروموشن
+```csharp
+var service = new DigiKala();
+var dkp=272383;
+var dkpc=1957080;
+var price=3_800_000;
+var login=new LoginModel{Email = "info@example.ir", Password = "1234" };
+service.Login(login);
+var result = service.ChangePromotionPrice(dkpc, dkp, price);
 ```
 
 
