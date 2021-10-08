@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>DigiKalaSellerBot.Core</id>
+    <version>2.0.0</version>
+    <authors>Salar Afshar</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://github.com/afsharsalar/DigiKalaSellerBot.Core</projectUrl>
+    <description>Digikala seller robat, price reducer</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.1">
+        <dependency id="HtmlAgilityPack" version="1.4.9.5" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="8.0.3" exclude="Build,Analyzers" />
+        <dependency id="RestSharp" version="105.2.3" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\Programming\DigiKalaSellerBot\DigiKalaSellerBot.Core\DigiKalaSellerBot.Core\bin\Debug\netcoreapp3.1\DigiKalaSellerBot.Core.dll" target="lib\netcoreapp3.1\DigiKalaSellerBot.Core.dll" />
+  </files>
+</package>
