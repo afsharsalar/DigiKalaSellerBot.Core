@@ -444,7 +444,90 @@ namespace DigiKalaSellerBot.Core.Helper
 
         #endregion
 
+        #region GetCustomers
 
+        public List<CustomerModel> GetCustomers()
+        {
+            var models = new List<CustomerModel>();
+            var url = "https://seller.digikala.com/ship-by-seller-orders/?page=1&items=30";
+            _restClient = new RestClient(url);
+            _restRequest = new RestRequest(Method.GET);
+            _restRequest.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0");
+            foreach (RestResponseCookie cookie4 in _cookies)
+            {
+                _restRequest.AddCookie(cookie4.Name, cookie4.Value);
+            }
+
+
+
+            _response = _restClient.Execute(_restRequest);
+            var content = _response.Content;
+
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(content);
+
+            var rows = doc.DocumentNode.SelectNodes($"//tr[contains(@class,'c-ship-by-seller__table-row')]");
+            if (rows != null)
+            {
+                foreach (var row in rows)
+                {
+
+
+
+                    var shipment = row.Attributes["data-shipment-id"];
+                    if (shipment != null)
+                    {
+
+                        _restClient = new RestClient($"https://seller.digikala.com/ajax/ship-by-seller-orders/customer/");
+                        _restRequest = new RestRequest(Method.POST);
+                        _restRequest.AddParameter("order_shipment_id", Convert.ToInt32(shipment.Value));
+                        _restRequest.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0");
+                        foreach (RestResponseCookie cookie4 in _cookies)
+                        {
+                            _restRequest.AddCookie(cookie4.Name, cookie4.Value);
+                        }
+
+
+
+                        _response = _restClient.Execute(_restRequest);
+                        HtmlDocument doc2 = new HtmlDocument();
+                        doc2.LoadHtml(_response.Content);
+
+                        var info = doc2.DocumentNode.SelectNodes($"//div[contains(@class,'c-ui-input__field c-ui-input__field--read-only')]");
+                        if (info != null)
+                        {
+                            var name = info[0].InnerText;
+                            var mobile = info[1].InnerText;
+                            var state = info[2].InnerText;
+                            var city = info[3].InnerText;
+                            var address = info[4].InnerText;
+                            var postalCode = info[5].InnerText;
+
+                            models.Add(new CustomerModel
+                            {
+                                Address = address,
+                                City = city,
+                                Mobile = mobile,
+                                Name = name,
+                                PostalCode = postalCode,
+                                ShipmentId = shipment.Value,
+                                State = state
+                            });
+
+                           
+
+                        }
+
+
+                    }
+
+                }
+            }
+
+            return models;
+        }
+
+        #endregion
 
     }
 

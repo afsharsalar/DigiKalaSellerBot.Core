@@ -114,5 +114,22 @@ namespace DigiKalaSellerBot.Test
             //assert
             Assert.AreEqual(true, result.status);
         }
+
+
+
+        [TestMethod]
+        public void CustomerTest()
+        {
+            //arrange
+            
+            var login = new LoginModel { Email = "", Password = "" };
+
+            //act
+            _digikala.Login(login);
+            var result = _digikala.GetCustomers();
+
+            //assert
+            Assert.AreEqual(true, result.Any());
+        }
     }
 }
