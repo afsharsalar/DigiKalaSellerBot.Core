@@ -8,7 +8,7 @@
   </a>
 </p>
 
-DigiKalaSellerBot.Core کتابخانه ای است متشکل از متدهای برای سلرهای دیجی کالا که بتوانند با استفاده از سیاست های رقابتی خود با سایر فروشنده های رقیب رقابت نمایند.
+DigiKalaSellerBot.Core کتابخانه ای است متشکل از متدهایی برای سلرهای دیجی کالا که بتوانند با استفاده از سیاست های رقابتی خود با سایر فروشنده های رقیب رقابت نمایند.
 
 
 </div>
@@ -32,6 +32,15 @@ var info=service.GetProductInfo(dkp);
 ```
 
 
+دریافت لیست نظرات محصول
+```csharp
+var service = new DigiKala();
+var dkp=3868296;
+var data = service.GetComments(dkp);
+```
+
+
+
 برای کاهش قیمت تنوع مورد نظر
 ```csharp
 var service = new DigiKala();
@@ -39,5 +48,42 @@ var dkp=272383;
 var dkpc=1957080;
 var price=3_800_000;
 var login=new LoginModel{Email = "info@example.ir", Password = "1234" };
-var result = _digikala.ChangePrice(dkpc, dkp, price, login);
+service.Login(login);
+var result = service.ChangePrice(dkpc, dkp, price);
 ```
+
+
+
+
+
+برای کاهش قیمت پروموشن
+```csharp
+var service = new DigiKala();
+var dkp=272383;
+var dkpc=1957080;
+var price=3_800_000;
+var login=new LoginModel{Email = "info@example.ir", Password = "1234" };
+service.Login(login);
+var result = service.ChangePromotionPrice(dkpc, dkp, price);
+```
+
+
+
+دریافت لیست محصولات سلر
+```csharp
+var service = new DigiKala();
+var login=new LoginModel{Email = "info@example.ir", Password = "1234" };
+service.Login(login);
+var result = service.GetSellerProducts();
+```
+
+
+
+دریافت لیست محصولاتی که بای باکس نیست
+```csharp
+var service = new DigiKala();
+var login=new LoginModel{Email = "info@example.ir", Password = "1234" };
+service.Login(login);
+var result = service.GetSellerProducts(buyBoxWinner:false);
+```
+

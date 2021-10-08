@@ -7,3 +7,12 @@ D:\Programming\DigiKalaSellerBot\DigiKalaSellerBot.Core\DigiKalaSellerBot.Core\b
 D:\Programming\DigiKalaSellerBot\DigiKalaSellerBot.Core\DigiKalaSellerBot.Core\bin\Debug\netcoreapp3.1\DigiKalaSellerBot.Core.pdb
 D:\Programming\DigiKalaSellerBot\DigiKalaSellerBot.Core\DigiKalaSellerBot.Core\obj\Debug\netcoreapp3.1\DigiKalaSellerBot.Core.dll
 D:\Programming\DigiKalaSellerBot\DigiKalaSellerBot.Core\DigiKalaSellerBot.Core\obj\Debug\netcoreapp3.1\DigiKalaSellerBot.Core.pdb
+D:\Programming\DigiKalaSellerBot.Core\DigiKalaSellerBot.Core\bin\Debug\netcoreapp3.1\DigiKalaSellerBot.Core.deps.json
+D:\Programming\DigiKalaSellerBot.Core\DigiKalaSellerBot.Core\bin\Debug\netcoreapp3.1\DigiKalaSellerBot.Core.dll
+D:\Programming\DigiKalaSellerBot.Core\DigiKalaSellerBot.Core\bin\Debug\netcoreapp3.1\DigiKalaSellerBot.Core.pdb
+D:\Programming\DigiKalaSellerBot.Core\DigiKalaSellerBot.Core\obj\Debug\netcoreapp3.1\DigiKalaSellerBot.Core.csprojAssemblyReference.cache
+D:\Programming\DigiKalaSellerBot.Core\DigiKalaSellerBot.Core\obj\Debug\netcoreapp3.1\DigiKalaSellerBot.Core.AssemblyInfoInputs.cache
+D:\Programming\DigiKalaSellerBot.Core\DigiKalaSellerBot.Core\obj\Debug\netcoreapp3.1\DigiKalaSellerBot.Core.AssemblyInfo.cs
+D:\Programming\DigiKalaSellerBot.Core\DigiKalaSellerBot.Core\obj\Debug\netcoreapp3.1\DigiKalaSellerBot.Core.csproj.CoreCompileInputs.cache
+D:\Programming\DigiKalaSellerBot.Core\DigiKalaSellerBot.Core\obj\Debug\netcoreapp3.1\DigiKalaSellerBot.Core.dll
+D:\Programming\DigiKalaSellerBot.Core\DigiKalaSellerBot.Core\obj\Debug\netcoreapp3.1\DigiKalaSellerBot.Core.pdb

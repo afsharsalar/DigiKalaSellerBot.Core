@@ -34,8 +34,17 @@ namespace DigiKalaSellerBot.Core.Helper
         #endregion
 
         #region Login
-        private void Login(LoginModel model)
+        public  void Login(LoginModel model)
         {
+            if (model == null)
+                throw new ArgumentNullException(nameof(model), "مشخصات ورود به پنل سلر دیجی کالا را وارد نمایید");
+
+            if (string.IsNullOrEmpty(model.Email))
+                throw new ArgumentNullException(nameof(model.Email), "ایمیل ورود به پنل سلر دیجی کالا را وارد نمایید");
+            if (string.IsNullOrEmpty(model.Password))
+                throw new ArgumentNullException(nameof(model.Password), "کلمه عبور ورود به پنل سلر دیجی کالا را وارد نمایید");
+
+
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
@@ -148,25 +157,15 @@ namespace DigiKalaSellerBot.Core.Helper
         /// <param name="newPrice">قیمت جدید به ریال</param>
         /// <param name="login">مشخصات ورود به پنل</param>
         /// <returns></returns>
-        public ResultModel ChangePrice(int dkpc, int dkp, int newPrice, LoginModel login)
-        {
-            if (login == null)
-                throw new ArgumentNullException(nameof(login), "مشخصات ورود به پنل سلر دیجی کالا را وارد نمایید");
-            
-            if (string.IsNullOrEmpty(login.Email))
-                throw new ArgumentNullException(nameof(login.Email), "ایمیل ورود به پنل سلر دیجی کالا را وارد نمایید");
-            if (string.IsNullOrEmpty(login.Password))
-                throw new ArgumentNullException(nameof(login.Password), "کلمه عبور ورود به پنل سلر دیجی کالا را وارد نمایید");
-
-
+        public ResultModel ChangePrice(int dkpc, int dkp, int newPrice)
+        {   
             var product = GetProductInfo(dkp);
             if(product==null)
                 throw new ArgumentNullException(nameof(dkp),"محصول مورد نظر یافت نشد");
 
             if(product.Data.All(q => q.price_list.variant_id != dkpc))
-                throw new ArgumentNullException(nameof(dkpc), "تنوع مورد نظر یافت نشد");
+                throw new ArgumentNullException(nameof(dkpc), "تنوع مورد نظر یافت نشد");           
             
-            Login(login);
 
             var info = GetStockInfo(dkpc, dkp);
 
@@ -204,10 +203,70 @@ namespace DigiKalaSellerBot.Core.Helper
         }
         #endregion
 
+        #region ChangePromotionPrice
+        /// <summary>
+        /// کاهش قیمت محصول
+        /// </summary>
+        /// <param name="dkpc">کد تنوع محصول موردنظر</param>
+        /// <param name="dkp">کد محصول دیجی کالا</param>
+        /// <param name="newPrice">قیمت جدید به ریال</param>
+        /// <param name="login">مشخصات ورود به پنل</param>
+        /// <returns></returns>
+        public ResultModel ChangePromotionPrice(int dkpc, int dkp, int newPrice)
+        {
+            var product = GetProductInfo(dkp);
+            if (product == null)
+                throw new ArgumentNullException(nameof(dkp), "محصول مورد نظر یافت نشد");
+
+            if (product.Data.All(q => q.price_list.variant_id != dkpc))
+                throw new ArgumentNullException(nameof(dkpc), "تنوع مورد نظر یافت نشد");
+
+            _restClient = new RestClient($"https://seller.digikala.com/ajax/promotion-management/periodic-prices/{dkpc}/");
+            _restRequest = new RestRequest(Method.GET);
+            _restRequest.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0");
+            foreach (RestResponseCookie cookie4 in _cookies)
+            {
+                _restRequest.AddCookie(cookie4.Name, cookie4.Value);
+            }
+
+
+            _response = _restClient.Execute(_restRequest);
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(_response.Content);
+
+            var promotionId = doc.DocumentNode.SelectNodes("//button[contains(@class,'js-variant-save-changes')]")[0].Attributes["data-variant"].Value;
+            var orderLimit = doc.DocumentNode.SelectNodes("//input[contains(@name,'variant[promotion_order_limit]')]")[0].Attributes["value"].Value;
+            var promotionLimit = doc.DocumentNode.SelectNodes("//input[contains(@name,'variant[promotion_limit]')]")[0].Attributes["value"].Value;
+            //var oldPrice = Convert.ToInt32(doc.DocumentNode.SelectNodes("//input[contains(@name,'variant[promotion_price]')]")[0].Attributes["value"].Value.Replace(",", "").Replace("۰", "0").GetEnglishNumber());
+
+
+            _restClient = new RestClient("https://seller.digikala.com/ajax/seller/8334947/save/variant/");
+            _restRequest = new RestRequest(Method.POST);
+            _restRequest.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0");
+
+            foreach (RestResponseCookie cookie4 in _cookies)
+            {
+                _restRequest.AddCookie(cookie4.Name, cookie4.Value);
+            }
+            _restRequest.AddParameter("promotion_variant_id", promotionId);
+            _restRequest.AddParameter("promotion_order_limit", orderLimit);
+            _restRequest.AddParameter("promotion_limit", promotionLimit);
+            _restRequest.AddParameter("promotion_price", newPrice);
+
+
+            _response = _restClient.Execute(_restRequest);
+            var data = JsonConvert.DeserializeObject<ResultModel>(_response.Content);
+            return data;
+
+        }
+        #endregion
+
         #region GetStockInfo
 
-        private SellerStockInfoModel GetStockInfo(int dkpc,int dkp)
+        public SellerStockInfoModel GetStockInfo(int dkpc,int dkp)
         {
+            
+
             _restClient = new RestClient("https://seller.digikala.com/content/create/product/variant/search/");
             _restRequest = new RestRequest(Method.POST);
             _restRequest.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0");
@@ -279,6 +338,41 @@ namespace DigiKalaSellerBot.Core.Helper
 
         #endregion
 
+        #region GetSellerProducts
+
+        public List<ProductItemDetail> GetSellerProducts(int pageSize=20,bool? buyBoxWinner=null)
+        {
+            _restClient = new RestClient("https://seller.digikala.com/ajax/variants/search/");
+            _restRequest = new RestRequest(Method.POST);
+            _restRequest.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0");
+            foreach (RestResponseCookie cookie4 in _cookies)
+            {
+                _restRequest.AddCookie(cookie4.Name, cookie4.Value);
+            }
+
+            _restRequest.AddParameter("items", pageSize);
+            if(buyBoxWinner.HasValue)
+                _restRequest.AddParameter("search[is_buy_box_winner]", buyBoxWinner.Value?1: 0);
+
+            _restRequest.AddParameter("search[type]", "all");
+            _restRequest.AddParameter("search[active]", 1);
+            _restRequest.AddParameter("search[moderation_status]", "approved");
+
+            _response = _restClient.Execute(_restRequest);
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(_response.Content);
+            if (string.IsNullOrEmpty(_response.Content))
+                return null;
+            
+
+            var data = JsonConvert.DeserializeObject<ProductSearchModel>(_response.Content);
+            return data.data.Items;         
+
+
+        }
+
+        #endregion
+
         #region DecodeEncodedNonAsciiCharacters
 
         private string DecodeEncodedNonAsciiCharacters(string value)
@@ -292,6 +386,66 @@ namespace DigiKalaSellerBot.Core.Helper
         }
 
         #endregion
+
+        #region GetComments
+
+        public List<CommentModel> GetComments(int dkp,int page=1)
+        {
+            var models = new List<CommentModel>();
+            
+            using (WebClient client = new WebClient { Encoding = Encoding.UTF8 })
+            {
+                var url = $"https://www.digikala.com/ajax/product/comments/list/{dkp}/?page={page}&mode=newest_comment";
+                var content = client.DownloadString(url);
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(content);
+                var comments = doc.DocumentNode.SelectNodes("//div[contains(@class,'c-comments__item--pdp')]");
+                if (comments != null)
+                {
+                    foreach (var comment in comments)
+                    {
+                        HtmlDocument doc2 = new HtmlDocument();
+                        doc2.LoadHtml(comment.InnerHtml);
+
+                        var text = "";
+                        var textNode = doc2.DocumentNode.SelectSingleNode("//span[contains(@class,'c-comments__title')]");
+                        if (textNode != null)
+                        {
+                            text = textNode.InnerText;
+                        }
+
+
+                        var author = doc2.DocumentNode.SelectNodes("//span[contains(@class,'c-comments__detail')]");
+
+                        var seller = doc2.DocumentNode.SelectSingleNode("//a[contains(@class,'c-comments__seller')]");
+                        var title = "";
+                        var titleNode = doc2.DocumentNode.SelectSingleNode("//div[contains(@class,'c-comments__content')]");
+                        if (titleNode != null)
+                        {
+                            title = titleNode.InnerText;
+                        }
+
+
+                        models.Add(new CommentModel
+                        {
+                            Title = text,
+                            Text = title,
+                            Author = author != null ? author[1].InnerText : "",
+                            Seller = seller != null ? seller.InnerText : ""
+                        });
+
+
+                    }
+                }
+                return models;
+            }
+        }
+
+
+        #endregion
+
+
+
     }
 
 
