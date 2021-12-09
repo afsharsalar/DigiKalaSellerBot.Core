@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "DigiKalaSellerBot.Test/1.0.0": {
         "dependencies": {
-          "DigiKalaSellerBot.Core": "1.5.0",
+          "DigiKalaSellerBot.Core": "2.0.0",
           "MSTest.TestAdapter": "2.1.1",
           "MSTest.TestFramework": "2.1.1",
           "Microsoft.NET.Test.Sdk": "16.7.1",
@@ -1087,7 +1087,7 @@
           "System.Xml.ReaderWriter": "4.3.0"
         }
       },
-      "DigiKalaSellerBot.Core/1.5.0": {
+      "DigiKalaSellerBot.Core/2.0.0": {
         "dependencies": {
           "HtmlAgilityPack": "1.4.9.5",
           "Newtonsoft.Json": "9.0.1",
@@ -1728,7 +1728,7 @@
       "path": "system.xml.xdocument/4.3.0",
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
     },
-    "DigiKalaSellerBot.Core/1.5.0": {
+    "DigiKalaSellerBot.Core/2.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

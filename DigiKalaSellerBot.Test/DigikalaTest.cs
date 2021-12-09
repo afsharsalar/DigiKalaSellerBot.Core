@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DigiKalaSellerBot.Core.Helper;
 using DigiKalaSellerBot.Core.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -130,6 +131,60 @@ namespace DigiKalaSellerBot.Test
 
             //assert
             Assert.AreEqual(true, result.Any());
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void LoginParamNullTest()
+        {
+            //arrange
+            var email = "";
+            var password = "";
+
+            //act
+            _digikala.Login(new LoginModel{Email = email,Password = password});
+
+            //assert
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void LoginPasswordNullTest()
+        {
+            //arrange
+            var email = "info@";
+            var password = "";
+
+            //act
+            try
+            {
+                _digikala.Login(new LoginModel { Email = email, Password = password });
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("کلمه عبور ورود به پنل سلر دیجی کالا را وارد نمایید", ex.Message);
+                throw;
+            }
+           
+
+            //assert
+
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void LoginNullTest()
+        {
+            //arrange
+            
+
+            //act
+            _digikala.Login(null);
+
+            //assert
         }
     }
 }

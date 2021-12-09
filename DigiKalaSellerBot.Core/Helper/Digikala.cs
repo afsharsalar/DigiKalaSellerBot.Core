@@ -40,9 +40,9 @@ namespace DigiKalaSellerBot.Core.Helper
                 throw new ArgumentNullException(nameof(model), "مشخصات ورود به پنل سلر دیجی کالا را وارد نمایید");
 
             if (string.IsNullOrEmpty(model.Email))
-                throw new ArgumentNullException(nameof(model.Email), "ایمیل ورود به پنل سلر دیجی کالا را وارد نمایید");
+                throw new ArgumentException(nameof(model.Email), "ایمیل ورود به پنل سلر دیجی کالا را وارد نمایید");
             if (string.IsNullOrEmpty(model.Password))
-                throw new ArgumentNullException(nameof(model.Password), "کلمه عبور ورود به پنل سلر دیجی کالا را وارد نمایید");
+                throw new ArgumentException("کلمه عبور ورود به پنل سلر دیجی کالا را وارد نمایید");
 
 
             ServicePointManager.Expect100Continue = true;
